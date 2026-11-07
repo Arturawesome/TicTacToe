@@ -1,0 +1,20 @@
+
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: ttt-db
+
+    environment:
+      POSTGRES_USER: ttt
+      POSTGRES_PASSWORD: ttt
+      POSTGRES_DB: ttt
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./db/userTable.sql:/docker-entrypoint-initdb.d/02-user.sql
+volumes:
+  postgres_data:
